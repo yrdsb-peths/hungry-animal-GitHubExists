@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Elephant here.
+ * The elephant, the player character
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Stanley 
+ * @version May 2023
  */
 public class Elephant extends Actor
 {
@@ -14,6 +14,30 @@ public class Elephant extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        // Moves corresponding with which key is pressed
+        if (Greenfoot.isKeyDown("left"))
+        {
+            move(-1);
+        }
+        if (Greenfoot.isKeyDown("right"))
+        {
+            move(1);
+        }
+        eat();
+    }
+    
+    /**
+     * Eat apple and spawn new apple when previous is eaten
+     */
+    public void eat()
+    {
+        if (isTouching(Apple.class))
+        {
+            removeTouching(Apple.class);
+            MyWorld world = (MyWorld) getWorld();
+            world.increaseScore();
+            world.createApple();
+        }
+        
     }
 }
