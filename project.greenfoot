@@ -1,6 +1,7 @@
 #Greenfoot project file
 class.Apple.image=apple.png
 class.Elephant.image=elephant_idle.png
+class.MyWorld.image=5c87d5391f679e9c6cff7176fb58eb20f201f94br1-693-390v2_uhq.jpg
 dependency1.from=MyWorld
 dependency1.to=Label
 dependency1.type=UsesDependency
@@ -71,5 +72,5 @@ target4.y=0
 version=3.0.0
 width=1475
 world.lastInstantiated=MyWorld
-xPosition=379
-yPosition=113
+xPosition=234
+yPosition=159
