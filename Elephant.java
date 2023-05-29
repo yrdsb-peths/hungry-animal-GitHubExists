@@ -8,9 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Elephant extends Actor
 {
-    GreenfootSound elephantSound = new GreenfootSound("elephantcub.mp3");
     GreenfootImage[] idleRight = new GreenfootImage[8];
     GreenfootImage[] idleLeft = new GreenfootImage[8];
+    double velocity = 0;
     //Direction elephant is facing
     String facing = "right";
     SimpleTimer animationTimer = new SimpleTimer();
@@ -67,36 +67,33 @@ public class Elephant extends Actor
      */
     public void act()
     {
-        // Moves corresponding with which key is pressed
+        //Elephant moves depending on velocity
+        move((int)(velocity+0.5));
+        
+        // Changes velocity with which key is pressed, if no key is pressed, let the elephant slow down to a halt
         if (Greenfoot.isKeyDown("left"))
         {
-            move(-2);
+            velocity -= 0.5;
+            if (velocity < -6)
+            {
+                velocity = -6;
+            }
             facing = "left";
         }
-        if (Greenfoot.isKeyDown("right"))
+        else if (Greenfoot.isKeyDown("right"))
         {
-            move(2);
+            velocity += 0.5;
+            if (velocity > 6)
+            {
+                velocity = 6;
+            }
             facing = "right";
         }
-        //Remove apple if elephant eats it
-        eat();
+        else
+        {
+            velocity *= 0.9;
+        }
         //Animate elephant
         animateElephant();
-    }
-    
-    /**
-     * Eat apple and spawn new apple when previous is eaten
-     */
-    public void eat()
-    {
-        if (isTouching(Apple.class))
-        {
-            removeTouching(Apple.class);
-            MyWorld world = (MyWorld) getWorld();
-            world.increaseScore();
-            world.createApple();
-            elephantSound.play();
-        }
-        
     }
 }
